@@ -1,0 +1,6 @@
+{
+	"name": "S3 to Blob Copy",
+	"properties": {
+		"description": "S3 to Blob Copy"
+	}
+}
