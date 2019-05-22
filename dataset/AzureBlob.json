@@ -1,0 +1,15 @@
+{
+	"name": "AzureBlob",
+	"properties": {
+		"description": "Azure Blob",
+		"linkedServiceName": {
+			"referenceName": "AzBlobStorage_Staging",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"fileName": "",
+			"folderPath": "blob1"
+		}
+	}
+}
