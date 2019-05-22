@@ -61,7 +61,7 @@
 							"value": "@pipeline().parameters.fileName",
 							"type": "Expression"
 						},
-						"pipelineRunld": "@pipeline().RunId"
+						"pipelineRunld": "@pipeline().RunId "
 					}
 				},
 				"linkedServiceName": {
