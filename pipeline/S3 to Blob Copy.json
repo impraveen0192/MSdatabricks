@@ -73,11 +73,11 @@
 		"parameters": {
 			"inputPath": {
 				"type": "string",
-				"defaultValue": "/"
+				"defaultValue": "/blob1"
 			},
 			"outputPath": {
 				"type": "string",
-				"defaultValue": "/processed_sink"
+				"defaultValue": "/blob1"
 			},
 			"fileName": {
 				"type": "string",
