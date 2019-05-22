@@ -73,7 +73,7 @@
 		"parameters": {
 			"inputPath": {
 				"type": "string",
-				"defaultValue": "/staged_sink"
+				"defaultValue": "/"
 			},
 			"outputPath": {
 				"type": "string",
