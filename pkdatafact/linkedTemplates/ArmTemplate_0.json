@@ -74,28 +74,6 @@
 				},
 				"annotations": [],
 				"type": "AmazonS3Object",
-				"structure": [
-					{
-						"name": "AIRPORT_ID",
-						"type": "String"
-					},
-					{
-						"name": "AIRPORT",
-						"type": "String"
-					},
-					{
-						"name": "DISPLAY_AIRPORT_NAME",
-						"type": "String"
-					},
-					{
-						"name": "LATITUDE",
-						"type": "String"
-					},
-					{
-						"name": "LONGITUDE",
-						"type": "String"
-					}
-				],
 				"typeProperties": {
 					"format": {
 						"type": "TextFormat",
@@ -124,28 +102,6 @@
 				},
 				"annotations": [],
 				"type": "AzureBlob",
-				"structure": [
-					{
-						"name": "AIRPORT_ID",
-						"type": "String"
-					},
-					{
-						"name": "AIRPORT",
-						"type": "String"
-					},
-					{
-						"name": "DISPLAY_AIRPORT_NAME",
-						"type": "String"
-					},
-					{
-						"name": "LATITUDE",
-						"type": "String"
-					},
-					{
-						"name": "LONGITUDE",
-						"type": "String"
-					}
-				],
 				"typeProperties": {
 					"format": {
 						"type": "TextFormat",
@@ -190,17 +146,7 @@
 							"sink": {
 								"type": "BlobSink"
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"columnMappings": {
-									"AIRPORT_ID": "AIRPORT_ID",
-									"AIRPORT": "AIRPORT",
-									"DISPLAY_AIRPORT_NAME": "DISPLAY_AIRPORT_NAME",
-									"LATITUDE": "LATITUDE",
-									"LONGITUDE": "LONGITUDE"
-								}
-							}
+							"enableStaging": false
 						},
 						"inputs": [
 							{

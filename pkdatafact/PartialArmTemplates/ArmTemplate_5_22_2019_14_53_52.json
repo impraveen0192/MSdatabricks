@@ -6,26 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory Name",
 			"defaultValue": "pkdatafact"
-		},
-		"AmazonS3_source_secretAccessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS3_source'"
-		},
-		"AzBlobStorage_Staging_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzBlobStorage_Staging'"
-		},
-		"AzureBlob_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": ""
-		},
-		"AzureBlob_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "blob1"
-		},
-		"AmazonS3_source_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "AKIAZ5Z44B5EZNFKVZB4"
 		}
 	},
 	"variables": {
@@ -42,7 +22,6 @@
 					{
 						"name": "S3 to Azure blob",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -50,7 +29,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "FileSystemSource",
@@ -64,20 +42,17 @@
 						"inputs": [
 							{
 								"referenceName": "AmazodatasetS3",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureBlob",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
-				],
-				"annotations": []
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AmazodatasetS3')]",
@@ -93,7 +68,6 @@
 					"referenceName": "AmazonS3_source",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AmazonS3Object",
 				"typeProperties": {
 					"format": {
@@ -106,10 +80,7 @@
 					},
 					"bucketName": "demoact"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AmazonS3_source')]"
-			]
+			}
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlob')]",
@@ -121,7 +92,6 @@
 					"referenceName": "AzBlobStorage_Staging",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AzureBlob",
 				"typeProperties": {
 					"format": {
@@ -132,44 +102,10 @@
 						"skipLineCount": 0,
 						"firstRowAsHeader": true
 					},
-					"fileName": "[parameters('AzureBlob_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('AzureBlob_properties_typeProperties_folderPath')]"
+					"fileName": "",
+					"folderPath": "blob1"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzBlobStorage_Staging')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AmazonS3_source')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AmazonS3",
-				"typeProperties": {
-					"serviceUrl": "",
-					"accessKeyId": "[parameters('AmazonS3_source_properties_typeProperties_accessKeyId')]",
-					"secretAccessKey": {
-						"type": "SecureString",
-						"value": "[parameters('AmazonS3_source_secretAccessKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzBlobStorage_Staging')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzBlobStorage_Staging_connectionString')]"
-				}
-			},
-			"dependsOn": []
+			}
 		}
 	]
 }
