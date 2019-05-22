@@ -49,10 +49,19 @@
 				"typeProperties": {
 					"notebookPath": "/Users/praveenkumar32@deloitte.com/dataengineering with databricks/1 Datafactory ETL",
 					"baseParameters": {
-						"input": "@pipeline().parameters.inputPath",
-						"output": "@pipeline().parameters.outputPath",
-						"filename": "@pipeline().parameters.fileName",
-						"pipelineRunld": "@pipeline().Runld"
+						"input": {
+							"value": "@pipeline().parameters.inputPath",
+							"type": "Expression"
+						},
+						"output": {
+							"value": "@pipeline().parameters.outputPath",
+							"type": "Expression"
+						},
+						"filename": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						},
+						"pipelineRunld": "@pipeline().RunId"
 					}
 				},
 				"linkedServiceName": {
