@@ -11,6 +11,9 @@
 		"AzBlobStorage_Staging_connectionString": {
 			"value": ""
 		},
+		"AzureDatabricks1_newlinkedserv_accessToken": {
+			"value": ""
+		},
 		"AzureBlob_properties_typeProperties_fileName": {
 			"value": ""
 		},

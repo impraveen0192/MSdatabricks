@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzBlobStorage_Staging'"
 		},
+		"AzureDatabricks1_newlinkedserv_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1_newlinkedserv'"
+		},
 		"AzureBlob_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": ""
@@ -75,13 +79,66 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/praveenkumar32@deloitte.com/dataengineering with databricks/1 Datafactory ETL",
+							"baseParameters": {
+								"input": {
+									"value": "@pipeline().parameters.inputPath",
+									"type": "Expression"
+								},
+								"output": {
+									"value": "@pipeline().parameters.outputPath",
+									"type": "Expression"
+								},
+								"filename": {
+									"value": "@pipeline().parameters.fileName",
+									"type": "Expression"
+								},
+								"pipelineRunld": {
+									"value": "@pipeline().Runld",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1_newlinkedserv",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
+				"parameters": {
+					"inputPath": {
+						"type": "string",
+						"defaultValue": "/staged_sink"
+					},
+					"outputPath": {
+						"type": "string",
+						"defaultValue": "/processed_sink"
+					},
+					"fileName": {
+						"type": "string",
+						"defaultValue": "Product.csv"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AmazodatasetS3')]",
-				"[concat(variables('factoryId'), '/datasets/AzureBlob')]"
+				"[concat(variables('factoryId'), '/datasets/AzureBlob')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1_newlinkedserv')]"
 			]
 		},
 		{
@@ -167,6 +224,29 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzBlobStorage_Staging_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks1_newlinkedserv')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://canadacentral.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks1_newlinkedserv_accessToken')]"
+					},
+					"newClusterNodeType": "Standard_DS3_v2",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "5.3.x-scala2.11"
 				}
 			},
 			"dependsOn": []
