@@ -35,7 +35,45 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"notebookPath": "/Users/praveenkumar32@deloitte.com/dataengineering with databricks/1 Datafactory ETL",
+					"baseParameters": {
+						"input": "@pipeline().parameters.inputPath",
+						"output": "@pipeline().parameters.outputPath",
+						"filename": "@pipeline().parameters.fileName",
+						"pipelineRunld": "@pipeline().Runld"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1_newlinkedserv",
+					"type": "LinkedServiceReference"
+				}
 			}
-		]
+		],
+		"parameters": {
+			"inputPath": {
+				"type": "string",
+				"defaultValue": "/staged_sink"
+			},
+			"outputPath": {
+				"type": "string",
+				"defaultValue": "/processed_sink"
+			},
+			"fileName": {
+				"type": "string",
+				"defaultValue": "Product.csv"
+			}
+		}
 	}
 }
