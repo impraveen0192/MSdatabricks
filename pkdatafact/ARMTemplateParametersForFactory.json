@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "pkdatafact"
+		},
+		"AmazonS3_source_secretAccessKey": {
+			"value": ""
+		},
+		"AzBlobStorage_Staging_connectionString": {
+			"value": ""
+		},
+		"AzureBlob_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"AzureBlob_properties_typeProperties_folderPath": {
+			"value": "blob1"
+		},
+		"AmazonS3_source_properties_typeProperties_accessKeyId": {
+			"value": "AKIAZ5Z44B5EZNFKVZB4"
+		}
+	}
+}
